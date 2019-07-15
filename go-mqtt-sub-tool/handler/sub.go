@@ -43,14 +43,14 @@ func (this *CSub) Run(param *CRunParam) {
 			cc.Subscribe(tq)
 
 			for m := range cc.Incoming {
-				fmt.Printf("%s, [%s]\n", m.TopicName, timetool.GetNowSecondFormat())
+				fmt.Printf("%s, [%s]\r\n", m.TopicName, timetool.GetNowSecondFormat())
 				payload := m.Payload.(proto.BytesPayload)
 				if len(payload) == 0 {
-					fmt.Println("null")
+					fmt.Printf("null\r\n")
 				} else {
 					this.format(&(param.Format), payload)
 				}
-				fmt.Println()
+				fmt.Printf("\r\n")
 			}
 			fmt.Println("read break")
 			break
@@ -62,7 +62,7 @@ func (this *CSub) Run(param *CRunParam) {
 func (this *CSub) format(f *string, payload []byte) {
 	if *f == FormatJson {
 		var out bytes.Buffer
-		json.Indent(&out, payload, "", "\t")
+		json.Indent(&out, payload, "\r", "\t")
 		fmt.Println(out.String())
 	} else {
 		fmt.Println(string(payload))
