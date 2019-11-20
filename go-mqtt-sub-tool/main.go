@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./handler"
+	"main/handler"
 	"flag"
 )
 
